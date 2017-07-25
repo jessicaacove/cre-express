@@ -1,7 +1,7 @@
 const express = require('express');
 
 
-const LenderrModel = require('../models/lender-model');
+const LenderModel = require('../models/lender-model');
 
 
 const router = express.Router();

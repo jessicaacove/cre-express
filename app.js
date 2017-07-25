@@ -62,6 +62,10 @@ app.use('/', myProjectRoutes);
 const myInvestmentRoutes = require('./routes/investment-routes');
 app.use('/', myInvestmentRoutes);
 
+const myLenderRoutes = require('./routes/lender-routes');
+app.use('/', myLenderRoutes);
+
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');

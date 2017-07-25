@@ -30,10 +30,10 @@ const myProjectSchema = new Schema(
     // },
     mainImage: {
         type: String,
-    },
-    detailImages: {
-        type: [String]
     }
+    // detailImages: {
+    //     type: [String]
+    // }
   },
   {
     timestamps: true

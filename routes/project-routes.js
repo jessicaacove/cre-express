@@ -1,5 +1,5 @@
 const express = require('express');
-
+const multer = require('multer');
 
 const ProjectModel = require('../models/project-model');
 const InvestorModel = require('../models/investor-model');
@@ -7,10 +7,14 @@ const InvestmentModel = require('../models/investment-model');
 
 const router = express.Router();
 
+const myUploader = multer({
+  dest: __dirname + '/../public/uploads/'
+
+});
 
 
 
-router.post('/api/current-projects', (req, res, next) => {
+router.post('/api/current-projects', myUploader.single('file'), (req, res, next) => {
   if (!req.user) {
     res.status(401).json({ message: 'Log in to create a project.'});
     return;
@@ -21,9 +25,13 @@ router.post('/api/current-projects', (req, res, next) => {
     projectType: req.body.projectType,
     address: req.body.projectAddress,
     totalCost: req.body.projectTotalCost,
-    mainImage: req.body.projectMainImage,
-    detailImages: [req.body.projectDetailImage1, req.body.projectDetailImage2, req.body.projectDetailImage3, req.body.projectDetailImage4]
+    // mainImage: req.body.projectMainImage
+    // detailImages: [req.body.projectDetailImage1, req.body.projectDetailImage2, req.body.projectDetailImage3, req.body.projectDetailImage4]
   });
+
+  if(req.file) {
+    theProject.mainImage = '/uploads/' + req.file.filename;
+  }
 
   theProject.save((err) => {
     if (err && theProject.errors === undefined) {
@@ -36,9 +44,9 @@ router.post('/api/current-projects', (req, res, next) => {
         nameError: theProject.errors.projectName,
         typeError: theProject.errors.projectType,
         addressError: theProject.errors.address,
-        costError: theProject.errors.totalCost,
-        mainImageError: theProject.errors.mainImage,
-        detailImagesError: theProject.errors.detailImages
+        costError: theProject.errors.totalCost
+        // mainImageError: theProject.errors.mainImage
+        // detailImagesError: theProject.errors.detailImages
       });
       return;
     }

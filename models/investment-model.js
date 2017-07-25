@@ -8,14 +8,15 @@ const myInvestmentSchema = new Schema(
       type: Number,
       required: true
     },
-    // project: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Project'
-    // },
-    // investor: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Investor'
-    // }
+    projectId: {
+      type: String
+    },
+    investorId: {
+      type: String
+    },
+    investorName: {
+      type: String
+    }
   },
   {
     timestamps: true

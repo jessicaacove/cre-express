@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post('/api/investors', (req, res, next) => {
   if (!req.user) {
-    res.status(401).json({ message: 'Log in to view investors. 🐫'});
+    res.status(401).json({ message: 'Log in to view investors. '});
     return;
   }
 
@@ -19,7 +19,6 @@ router.post('/api/investors', (req, res, next) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    // investments: findById
   });
 
   theInvestor.save((err) => {
@@ -51,7 +50,6 @@ router.get('/api/investors', (req, res, next) => {
 
   InvestorModel
     .find()
-    // .populate('investment') //retrieve all the info of owners (needs "ref")
     .exec((err, allTheInvestors) => {
       if (err) {
         res.status(500).json({ message: 'Investor find failed'});

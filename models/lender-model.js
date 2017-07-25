@@ -36,11 +36,6 @@ const myLenderSchema = new Schema(
     debtIds: {
       type: [String]
     }
-    // user: {
-    //   type: Schema.Types.ObjectId,
-    //   require: true,
-    //   ref: 'User' // "ref" is the string name of a model that the ID refers to
-    // }             // you NEED "ref" to use "populate()"
   },
   {
     timestamps: true

@@ -2,7 +2,8 @@ const express = require('express');
 
 
 const ProjectModel = require('../models/project-model');
-
+const InvestorModel = require('../models/investor-model');
+const InvestmentModel = require('../models/investment-model');
 
 const router = express.Router();
 
@@ -85,14 +86,12 @@ router.get('/api/project/:id', (req, res, next) => {
   }
 
   ProjectModel
-    .findById("id")
+    .findById(req.params.id)
     .exec((err, projectById) => {
       if (err) {
         res.status(500).json({ message: 'Project find failed'});
         return;
       }
-
-    console.log(projectById);
 
     res.status(200).json(projectById);
   });
@@ -100,9 +99,53 @@ router.get('/api/project/:id', (req, res, next) => {
 
 
 
+router.post('/api/project/:id', (req, res, next) => {
+
+  if (!req.user) {
+    res.status(401).json({ message: 'Log in to create investments bitch.'});
+    return;
+  }
+
+  InvestorModel.findById(req.body.investor, (err, result) => {
+    if (err){
+      res.status(500).json({ message: 'Sorry, unable to find investor information'});
+    }
+
+  var investorName =  result.firstName + " " + result.lastName;
+
+  const theInvestment = new InvestmentModel({
+    investmentPercentage: req.body.investmentPercentage,
+    project: req.body.project,
+    investor: req.body.investor,
+    investorName: investorName
+  });
 
 
 
+  theInvestment.save((err) => {
+    if (err && theInvestment.errors === undefined) {
+      res.status(500).json({ message: 'Investment save failed'});
+      return;
+    }
+
+    // Validation error
+    if (err && theInvestment.errors) {
+      res.status(400).json({
+        investmentPercentageError: theInvestment.errors.investmentPercentage,
+        projectError: theInvestment.errors.project,
+        investorError: theInvestment.errors.investor
+      });
+      return;
+    }
+    // Put the full info here for Angular
+
+
+
+    // Success!
+        res.status(200).json(theInvestment);
+    }); // close theInvestment.save()
+  });
+}); // close router.post('/api/projects/:id', ...
 
 
 

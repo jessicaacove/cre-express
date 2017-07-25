@@ -16,10 +16,10 @@ const myInvestorSchema = new Schema(
       type: String,
       required: true
     },
-    // investments: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Investment'
-    // }
+    investments: {
+      type: Schema.Types.ObjectId,
+      ref: 'Investment'
+    }
   },
   {
     timestamps: true

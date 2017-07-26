@@ -30,6 +30,7 @@ const myProjectSchema = new Schema(
     // },
     mainImage: {
         type: String,
+        default: '/images/logoimg.png'
     }
     // detailImages: {
     //     type: [String]

@@ -16,10 +16,20 @@ const myInvestorSchema = new Schema(
       type: String,
       required: true
     },
-    investments: {
-      type: Schema.Types.ObjectId,
-      ref: 'Investment'
+    investments: [
+    {
+      investmentPercentage: {
+        type: Number,
+        required: true
+      },
+      projectName: {
+        type: String
+      },
+      projectId: {
+        type: Schema.Types.ObjectId
+      }
     }
+    ]
   },
   {
     timestamps: true

@@ -106,6 +106,19 @@ router.get('/api/project/:id', (req, res, next) => {
 }); //close router.get('/api/project/:id', ...
 
 
+router.get('api/projects/:id/delete', (req, res, next) => {
+  ProjectModel
+  .findByIdAndRemove(req.params.id)
+  .exec((err, projectFromDb) => {
+    res.status(500).json({ message: 'Project find failed on delete'});
+    return;
+    }
+      // If removed successfully, redirect to a URL.
+    // res.status(200).json(projectById);
+  );
+});
+
+
 
 router.post('/api/project/:id', (req, res, next) => {
 
@@ -127,8 +140,6 @@ router.post('/api/project/:id', (req, res, next) => {
     investor: req.body.investor,
     investorName: investorName
   });
-
-
 
   theInvestment.save((err) => {
     if (err && theInvestment.errors === undefined) {

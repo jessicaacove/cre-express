@@ -20,21 +20,44 @@ const myProjectSchema = new Schema(
       type: Number,
       required: true
     },
-    // investments: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Investment'              // "ref" is the string name of a model that the ID refers to           // you NEED "ref" to use "populate()"
-    // },
-    // Debt: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Loan'
-    // },
-    mainImage: {
-        type: String,
-        default: '/images/logoimg.png'
+    investments: [
+      {
+      investmentPercentage: {
+        type: Number
+      },
+      investorName: {
+        type: String
+      },
+      investorId: {
+        type: Schema.Types.ObjectId
+      }
     }
-    // detailImages: {
-    //     type: [String]
-    // }
+    ],
+    debt: [
+      {
+      debtPercentage: {
+        type: Number
+      },
+      institutionName: {
+        type: String,
+      },
+      lenderId: {
+        type: String
+      }
+      // contactFirstName: {
+      //   type: String,
+      //   required: true
+      // },
+      // contactLastName: {
+      //   type: String,
+      //   required: true
+      // }
+    }
+    ],
+    mainImage: {
+      type: String,
+      default: '/images/logoimg.png'
+    }
   },
   {
     timestamps: true

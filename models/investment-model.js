@@ -11,10 +11,10 @@ const myInvestmentSchema = new Schema(
     projectId: {
       type: String
     },
-    investorId: {
+    investorName: {
       type: String
     },
-    investorName: {
+    investorId: {
       type: String
     }
   },

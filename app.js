@@ -65,11 +65,14 @@ app.use('/', myInvestmentRoutes);
 const myLenderRoutes = require('./routes/lender-routes');
 app.use('/', myLenderRoutes);
 
+const myLoanRoutes = require('./routes/loan-routes');
+app.use('/', myLoanRoutes);
+
 // ____________Middleware________________________
 
 app.use((req, res, next) => {
   // if no routes match, send them the angular HTML
-  res.sendFile(__dirname + '/public/index/html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 

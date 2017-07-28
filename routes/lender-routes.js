@@ -75,6 +75,28 @@ router.get('/api/lenders', (req, res, next) => {
 
 
 
+// _____________________________________________________
+// GET LENDER BY ID
+
+
+router.get('/api/lender/:id', (req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ message: 'Log in to see lenders.'});
+    return;
+  }
+
+  LenderModel
+    .findById(req.params.id)
+    .exec((err, lenderById) => {
+      if (err) {
+        res.status(500).json({ message: 'Lender find failed'});
+        return;
+      }
+
+    res.status(200).json(lenderById);
+  });
+}); //close router.get('/api/lender/:id', ...
+
 
 
 

@@ -20,7 +20,6 @@ const myInvestorSchema = new Schema(
     {
       investmentPercentage: {
         type: Number,
-        required: true
       },
       projectName: {
         type: String

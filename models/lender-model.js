@@ -33,9 +33,19 @@ const myLenderSchema = new Schema(
     projectTypes: {
       type: [String]
     },
-    debtIds: {
-      type: [String]
-    }
+    debt: [
+      {
+        debtPercentage: {
+          type: Number,
+        },
+        projectName: {
+          type: String
+        },
+        projectId: {
+          type: Schema.Types.ObjectId
+        }
+      }
+    ]
   },
   {
     timestamps: true

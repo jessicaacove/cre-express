@@ -27,7 +27,8 @@ router.post('/api/investments', (req, res, next) => {
         $push: {
           investments: {
             investmentPercentage: req.body.amount,
-            investorName: investorbyid.firstName,
+            firstName: investorbyid.firstName,
+            lastName: investorbyid.lastName,
             investorId: investorbyid._id
           }
         },

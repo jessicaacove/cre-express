@@ -42,7 +42,7 @@ const myProjectSchema = new Schema(
         type: String,
       },
       lenderId: {
-        type: String
+        type: Schema.Types.ObjectId
       }
       // contactFirstName: {
       //   type: String,
